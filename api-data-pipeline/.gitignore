@@ -1,0 +1,35 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+.venv/
+
+# Environment and sensitive keys
+.env
+.env.local
+config/db_config.env
+
+# Logs and databases
+logs/*.log
+!logs/.gitkeep
+*.sqlite
+*.sqlite3
+
+# Unit test / coverage
+.pytest_cache/
+.coverage
+htmlcov/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Docker
+.docker/

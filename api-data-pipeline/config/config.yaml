@@ -1,0 +1,56 @@
+# ==============================================================================
+# REST API to MySQL Pipeline Configuration
+# ==============================================================================
+
+pipeline:
+  name: "ecommerce_product_catalog_etl"
+  version: "1.2.0"
+  environment: "development" # development | staging | production
+
+api:
+  base_url: "https://dummyjson.com"
+  endpoint: "/products"
+  page_size: 30
+  max_records: 120 # Set null or 0 to ingest full catalog (194 records)
+  timeout_seconds: 15
+  max_retries: 4
+  backoff_factor: 1.5
+  retry_status_codes:
+    - 429
+    - 500
+    - 502
+    - 503
+    - 504
+  headers:
+    User-Agent: "DataPipeline-ETL/1.0 (+https://github.com/portfolio/api-data-pipeline)"
+    Accept: "application/json"
+
+database:
+  # Overridden by environment variables if present (DB_HOST, DB_PORT, etc.)
+  host: "127.0.0.1"
+  port: 3306
+  database: "ecommerce_dw"
+  user: "etl_runner"
+  password: "etl_secure_password"
+  charset: "utf8mb4"
+  pool_size: 5
+  max_overflow: 10
+  batch_size: 100
+
+data_quality:
+  # Critical threshold: Pipeline aborts if critical checks fail
+  halt_on_critical_failure: true
+  min_records_threshold: 1
+  max_allowed_null_ratio_non_nullable: 0.00
+  price_min_bound: 0.01
+  rating_min_bound: 0.00
+  rating_max_bound: 5.00
+  stock_min_bound: 0
+
+logging:
+  level: "INFO"
+  format: "%(asctime)s [%(levelname)s] [%(name)s:%(lineno)d] %(message)s"
+  date_format: "%Y-%m-%d %H:%M:%S"
+  log_file: "logs/pipeline.log"
+  max_bytes: 10485760 # 10MB
+  backup_count: 5

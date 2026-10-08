@@ -1,0 +1,6 @@
+{
+  "name": "REST API to MySQL Data Pipeline - Data Engineering Portfolio",
+  "description": "Production-grade ETL data pipeline ingesting nested REST API data, transforming with pandas, running data quality validations, and idempotently loading into MySQL.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
